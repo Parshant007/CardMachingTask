@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-
-    private int cardID;
+    private int spriteID;
     private int id;
     private bool isFlipped;
     private bool turning;
+    private Image img;
 
-
+    private void Start()
+    {
+        img = GetComponent<Image>();
+    }
     private IEnumerator CardFlip(Transform thisTransform, float time, bool changeSprite)
     {
         Quaternion startRotation = thisTransform.rotation;
@@ -28,7 +32,7 @@ public class Card : MonoBehaviour
         if (changeSprite)
         {
             isFlipped = !isFlipped;
-          //      ChangeSprite();
+            ChangeSprite();
             StartCoroutine(CardFlip(transform, time, false));
         }
         else
@@ -45,7 +49,7 @@ public class Card : MonoBehaviour
     public void CardBtnEvt()
     {
         if (isFlipped || turning) return;
-     //   if (!_CardGameManager.Instance.canClick()) return;
+        if (!CardManager.Instance.canClick()) return;
         Flip();
         StartCoroutine(SelectionEvent());
     }
@@ -53,6 +57,65 @@ public class Card : MonoBehaviour
     private IEnumerator SelectionEvent()
     {
         yield return new WaitForSeconds(0.5f);
-       // _CardGameManager.Instance.cardClicked(spriteID, id);
+        CardManager.Instance.cardClicked(spriteID, id);
+    }
+
+    // spriteID getter and setter
+    public int SpriteID
+    {
+        set
+        {
+            spriteID = value;
+            isFlipped = true;
+            ChangeSprite();
+        }
+        get { return spriteID; }
+    }
+
+    // card ID getter and setter
+    public int ID
+    {
+        set { id = value; }
+        get { return id; }
+    }
+
+    // toggle front/back sprite
+    private void ChangeSprite()
+    {
+        if (spriteID == -1 || img == null) return;
+        if (isFlipped)
+            img.sprite = CardManager.Instance.GetSprite(spriteID);
+        else
+            img.sprite = CardManager.Instance.CardBack();
+    }
+    // call fade animation
+    public void Inactive()
+    {
+        StartCoroutine(Fade());
+    }
+    // play fade animation by changing alpha of img's color
+    private IEnumerator Fade()
+    {
+        float rate = 1.0f / 2.5f;
+        float t = 0.0f;
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime * rate;
+            img.color = Color.Lerp(img.color, Color.clear, t);
+
+            yield return null;
+        }
+    }
+    // set card to be active color
+    public void Active()
+    {
+        if (img)
+            img.color = Color.white;
+    }
+    // reset card default rotation
+    public void ResetRotation()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        isFlipped = true;
     }
 }
