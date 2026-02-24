@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static CardManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if(Instance != null &  Instance!= this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
         
