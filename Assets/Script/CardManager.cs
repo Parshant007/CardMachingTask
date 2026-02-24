@@ -19,7 +19,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private static int gameSize = 16;
+    private static int gameSize = 2;
     // gameobject instance
     [SerializeField]
     private GameObject prefab;
@@ -144,7 +144,7 @@ public class CardManager : MonoBehaviour
     IEnumerator HideFace()
     {
         //display for a short moment before flipping
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.6f);
         for (int i = 0; i < cards.Length; i++)
             cards[i].Flip();
         yield return new WaitForSeconds(0.5f);

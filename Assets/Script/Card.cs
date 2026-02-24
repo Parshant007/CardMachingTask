@@ -9,12 +9,10 @@ public class Card : MonoBehaviour
     private int id;
     private bool isFlipped;
     private bool turning;
+    [SerializeField]
     private Image img;
 
-    private void Start()
-    {
-        img = GetComponent<Image>();
-    }
+
     private IEnumerator CardFlip(Transform thisTransform, float time, bool changeSprite)
     {
         Quaternion startRotation = thisTransform.rotation;
