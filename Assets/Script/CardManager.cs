@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,8 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private static int gameSize = 2;
+    [SerializeField] private int rows = 3;
+    [SerializeField] private int columns = 6;
     // gameobject instance
     [SerializeField]
     private GameObject prefab;
@@ -50,6 +52,8 @@ public class CardManager : MonoBehaviour
     private int cardSelected;
     private int cardLeft;
     private bool gameStart;
+    [SerializeField]
+    private ToggleGroup levelToggle;
     void Start()
     {
         gameStart = false;
@@ -57,6 +61,10 @@ public class CardManager : MonoBehaviour
     }
 
     // Start a game
+    public void SetGameLevel() {
+        Toggle toggle = levelToggle.ActiveToggles().FirstOrDefault();
+        SetGridSize(toggle.GetComponent<LevelState>().level); 
+    }
     public void StartCardGame()
     {
         if (gameStart) return; // return if game already running
@@ -78,66 +86,55 @@ public class CardManager : MonoBehaviour
     // Initialize cards, size, and position based on size of game
     private void SetGamePanel()
     {
-        // if game is odd, we should have 1 card less
-        int isOdd = gameSize % 2;
+        int totalCards = rows * columns;
 
-        cards = new Card[gameSize * gameSize - isOdd];
-        // remove all gameobject from parent
+        // If odd, remove 1 card (must be even for pairing)
+        if (totalCards % 2 != 0)
+            totalCards -= 1;
+
+        cards = new Card[totalCards];
+
+        // Destroy old cards
         foreach (Transform child in cardList.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-        // calculate position between each card & start position of each card based on the Panel
-        RectTransform panelsize = panel.transform.GetComponent(typeof(RectTransform)) as RectTransform;
-        float row_size = panelsize.sizeDelta.x;
-        float col_size = panelsize.sizeDelta.y;
-        float scale = 1.0f / gameSize;
-        float xInc = row_size / gameSize;
-        float yInc = col_size / gameSize;
-        float curX = -xInc * (float)(gameSize / 2);
-        float curY = -yInc * (float)(gameSize / 2);
+            Destroy(child.gameObject);
 
-        if (isOdd == 0)
+        RectTransform panelSize = panel.GetComponent<RectTransform>();
+
+        float rowSize = panelSize.sizeDelta.x;
+        float colSize = panelSize.sizeDelta.y;
+
+        float xInc = rowSize / columns;
+        float yInc = colSize / rows;
+
+        float scaleX = 1f / columns;
+        float scaleY = 1f / rows;
+
+        float startX = -rowSize / 2 + xInc / 2;
+        float startY = -colSize / 2 + yInc / 2;
+
+        int index = 0;
+
+        for (int i = 0; i < rows; i++)
         {
-            curX += xInc / 2;
-            curY += yInc / 2;
-        }
-        float initialX = curX;
-        // for each in y-axis
-        for (int i = 0; i < gameSize; i++)
-        {
-            curX = initialX;
-            // for each in x-axis
-            for (int j = 0; j < gameSize; j++)
+            for (int j = 0; j < columns; j++)
             {
-                GameObject c;
-                // if is the last card and game is odd, we instead move the middle card on the panel to last spot
-                if (isOdd == 1 && i == (gameSize - 1) && j == (gameSize - 1))
-                {
-                    int index = gameSize / 2 * gameSize + gameSize / 2;
-                    c = cards[index].gameObject;
-                }
-                else
-                {
-                    // create card prefab
-                    c = Instantiate(prefab);
-                    // assign parent
-                    c.transform.parent = cardList.transform;
+                if (index >= totalCards)
+                    break;
 
-                    int index = i * gameSize + j;
-                    cards[index] = c.GetComponent<Card>();
-                    cards[index].ID = index;
-                    // modify its size
-                    c.transform.localScale = new Vector3(scale, scale);
-                }
-                // assign location
-                c.transform.localPosition = new Vector3(curX, curY, 0);
-                curX += xInc;
+                GameObject c = Instantiate(prefab, cardList.transform);
 
+                c.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+                c.transform.localPosition = new Vector3(
+                    startX + j * xInc,
+                    startY + i * yInc,
+                    0);
+
+                cards[index] = c.GetComponent<Card>();
+                cards[index].ID = index;
+
+                index++;
             }
-            curY += yInc;
         }
-
     }
 
     // Flip all cards after a short period
@@ -264,8 +261,38 @@ public class CardManager : MonoBehaviour
     {
         info.SetActive(i);
     }
-    void Update()
+
+    private void GridLayout(int x, int y) { 
+        rows= x;
+        columns = y;
+    }
+    private void SetGridSize(Level level)
     {
-        
+        switch ( level)
+        {
+            case Level.Easy:
+                GridLayout(2, 2);
+                break;
+
+            case Level.Moderate:
+                GridLayout(2, 3);
+                break;
+
+            case Level.Medium:
+                GridLayout(4, 3);
+                break;
+
+            case Level.Tricky:
+                GridLayout(3, 4);
+                break;
+
+            case Level.Hard:
+                GridLayout(4, 4);
+                break;
+
+            case Level.Extreme:
+                GridLayout(4, 5);
+                break;
+        }
     }
 }

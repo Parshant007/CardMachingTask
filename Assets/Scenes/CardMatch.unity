@@ -207,6 +207,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1363050923}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
+        m_MethodName: SetGameLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1363050923}
+        m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
         m_MethodName: StartCardGame
         m_Mode: 1
         m_Arguments:
@@ -426,8 +438,9 @@ GameObject:
   m_Component:
   - component: {fileID: 127571655}
   - component: {fileID: 127571656}
+  - component: {fileID: 127571657}
   m_Layer: 5
-  m_Name: Toggle (1)
+  m_Name: Modrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,6 +515,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &127571657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127571654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e73a92903bab46ab96cb72cf1b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 5
 --- !u!1 &208752595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,8 +1179,9 @@ GameObject:
   m_Component:
   - component: {fileID: 862807707}
   - component: {fileID: 862807708}
+  - component: {fileID: 862807709}
   m_Layer: 5
-  m_Name: Toggle (4)
+  m_Name: Hard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1230,6 +1257,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &862807709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862807706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e73a92903bab46ab96cb72cf1b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 5
 --- !u!1 &961010047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,8 +1356,9 @@ GameObject:
   m_Component:
   - component: {fileID: 972705247}
   - component: {fileID: 972705248}
+  - component: {fileID: 972705249}
   m_Layer: 5
-  m_Name: Toggle (5)
+  m_Name: Extreme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1392,6 +1433,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &972705249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972705246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e73a92903bab46ab96cb72cf1b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 5
 --- !u!1 &1228197201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43671311b60ce934d9b7a0bbab1d8335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rows: 3
+  columns: 6
   prefab: {fileID: 7473585382366940877, guid: d652350c87e84d3498c247d3c0d8e1f4, type: 3}
   cardList: {fileID: 1780721452}
   cardBack: {fileID: 21300000, guid: 299fc2cfbe532a6468a69ffff7248aab, type: 3}
@@ -1798,6 +1854,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0cf92b6f322cb334480fa742516dc167, type: 3}
   panel: {fileID: 548422774}
   info: {fileID: 2002839700}
+  levelToggle: {fileID: 38946516}
 --- !u!1 &1469091011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,8 +2091,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1622231068}
   - component: {fileID: 1622231069}
+  - component: {fileID: 1622231070}
   m_Layer: 5
-  m_Name: Toggle (2)
+  m_Name: Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2111,6 +2169,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1622231070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622231067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e73a92903bab46ab96cb72cf1b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 5
 --- !u!1 &1628061498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,8 +2269,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1757204604}
   - component: {fileID: 1757204605}
+  - component: {fileID: 1757204606}
   m_Layer: 5
-  m_Name: Toggle (3)
+  m_Name: Tricky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2274,6 +2346,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1757204606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757204603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e73a92903bab46ab96cb72cf1b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 5
 --- !u!1 &1762550813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,8 +2933,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1943165880}
   - component: {fileID: 1943165881}
+  - component: {fileID: 1943165883}
+  - component: {fileID: 1943165884}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: Easy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2925,6 +3012,27 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!222 &1943165883
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943165879}
+  m_CullTransparentMesh: 1
+--- !u!114 &1943165884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943165879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e73a92903bab46ab96cb72cf1b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
 --- !u!1 &2002839700
 GameObject:
   m_ObjectHideFlags: 0
