@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,10 @@ public class CardManager : MonoBehaviour
     private GameObject panel;
     [SerializeField]
     private GameObject info;
+    [SerializeField]
+    TextMeshProUGUI matches;
+    [SerializeField]
+    TextMeshProUGUI turns;
     // other UI
     /*    [SerializeField]
         private Text sizeLabel;
@@ -223,9 +228,13 @@ public class CardManager : MonoBehaviour
         }
         else
         { // second card selected
+            Card.CardClick++;
+            TurnText(Card.CardClick);
             if (spriteSelected == spriteId)
             {
                 //correctly matched
+                Card.CardMatch++;
+                CardMatch(Card.CardMatch);
                 cards[cardSelected].Inactive();
                 cards[cardId].Inactive();
                 cardLeft -= 2;
@@ -253,12 +262,14 @@ public class CardManager : MonoBehaviour
     // stop game
     private void EndGame()
     {
+        ResetText();
         gameStart = false;
         HideMenue((gameStart ? false : true));
         panel.SetActive(false);
     }
     public void GiveUp()
     {
+        ResetText();
         EndGame();
     }
     public void DisplayInfo(bool i)
@@ -300,8 +311,22 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hide game menue when start game
+    /// </summary>
+    /// <param name="hide"></param>
     private void HideMenue(bool hide)
     {
         menu.SetActive(hide);
+    }
+    // Set game text
+    private void TurnText(int turnCount) { turns.text = turnCount.ToString(); }
+    private void CardMatch(int match) { matches.text = match.ToString(); }
+    //Reset Text when win
+    private void ResetText()
+    {
+        Card.CardClick = Card.CardMatch= 0;
+        TurnText(0);
+        CardMatch(0);
     }
 }

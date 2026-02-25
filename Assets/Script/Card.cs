@@ -48,6 +48,7 @@ public class Card : MonoBehaviour
     {
         if (isFlipped || turning) return;
         if (!CardManager.Instance.canClick()) return;
+
         Flip();
         StartCoroutine(SelectionEvent());
     }
@@ -116,4 +117,8 @@ public class Card : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         isFlipped = true;
     }
+
+    public static int CardClick { get;  set; }
+    public static int CardMatch { get;  set; }
+
 }
