@@ -48,6 +48,8 @@ public class CardManager : MonoBehaviour
         private Slider sizeSlider;
         [SerializeField]
         private Text timeLabel;*/
+    [SerializeField]
+    private GameObject menu;
     private int spriteSelected;
     private int cardSelected;
     private int cardLeft;
@@ -69,6 +71,7 @@ public class CardManager : MonoBehaviour
     {
         if (gameStart) return; // return if game already running
         gameStart = true;
+        HideMenue((gameStart ? false : true));
         // toggle UI
         panel.SetActive(true);
         info.SetActive(false);
@@ -251,6 +254,7 @@ public class CardManager : MonoBehaviour
     private void EndGame()
     {
         gameStart = false;
+        HideMenue((gameStart ? false : true));
         panel.SetActive(false);
     }
     public void GiveUp()
@@ -294,5 +298,10 @@ public class CardManager : MonoBehaviour
                 GridLayout(4, 5);
                 break;
         }
+    }
+
+    private void HideMenue(bool hide)
+    {
+        menu.SetActive(hide);
     }
 }
