@@ -16,8 +16,8 @@ public class AudioHandler : MonoBehaviour
             Instance = this;
         }
     }
-
     private AudioSource audioSource;
+    [SerializeField]
     private AudioClip[] audioClips;
     // Start is called before the first frame update
     void Start()

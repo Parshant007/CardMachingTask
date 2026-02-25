@@ -256,7 +256,7 @@ public class CardManager : MonoBehaviour
         if (cardLeft == 0)
         {
             EndGame();
-           // AudioPlayer.Instance.PlayAudio(1);
+            AudioHandler.Instance.PlaySound(1);
         }
     }
     // stop game

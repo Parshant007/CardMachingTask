@@ -39,8 +39,8 @@ public class Card : MonoBehaviour
     // perform a 180 degree flip
     public void Flip()
     {
+        AudioHandler.Instance.PlaySound(0);
         turning = true;
-      //  AudioPlayer.Instance.PlayAudio(0);
         StartCoroutine(CardFlip(transform, 0.25f, true));
     }
 
