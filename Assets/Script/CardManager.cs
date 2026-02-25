@@ -46,13 +46,6 @@ public class CardManager : MonoBehaviour
     TextMeshProUGUI matches;
     [SerializeField]
     TextMeshProUGUI turns;
-    // other UI
-    /*    [SerializeField]
-        private Text sizeLabel;
-        [SerializeField]
-        private Slider sizeSlider;
-        [SerializeField]
-        private Text timeLabel;*/
     [SerializeField]
     private GameObject menu;
     private int spriteSelected;
@@ -193,12 +186,6 @@ public class CardManager : MonoBehaviour
             }
 
     }
-    // Slider update gameSize
-    /*   public void SetGameSize()
-       {
-           gameSize = (int)sizeSlider.value;
-           sizeLabel.text = gameSize + " X " + gameSize;
-       }*/
     // Update is called once per frame
     // return Sprite based on its id
     public Sprite GetSprite(int spriteId)
@@ -276,7 +263,11 @@ public class CardManager : MonoBehaviour
     {
         info.SetActive(i);
     }
-
+    /// <summary>
+    /// Set grid size based on level, this is private because we only want to set grid size when start game and we will call this function in SetGameLevel function
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
     private void GridLayout(int x, int y) { 
         rows= x;
         columns = y;
